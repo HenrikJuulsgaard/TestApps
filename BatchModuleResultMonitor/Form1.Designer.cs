@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
             this.InfoText = new System.Windows.Forms.TextBox();
@@ -43,27 +43,27 @@
             this.chart1.BackColor = System.Drawing.Color.DimGray;
             this.chart1.BorderlineColor = System.Drawing.Color.DarkGray;
             this.chart1.BorderSkin.PageColor = System.Drawing.Color.DarkGray;
-            chartArea2.BackColor = System.Drawing.Color.Gray;
-            chartArea2.BackSecondaryColor = System.Drawing.Color.DarkGray;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.BackColor = System.Drawing.Color.Gray;
+            chartArea1.BackSecondaryColor = System.Drawing.Color.DarkGray;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(47, 138);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.LabelBackColor = System.Drawing.Color.Gray;
-            series2.Legend = "Legend1";
-            series2.Name = "Batch Weight";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(1064, 300);
+            series1.ChartArea = "ChartArea1";
+            series1.LabelBackColor = System.Drawing.Color.Gray;
+            series1.Legend = "Legend1";
+            series1.Name = "Batch Weight";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(1423, 583);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(47, 553);
+            this.button1.Location = new System.Drawing.Point(47, 742);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 44);
             this.button1.TabIndex = 1;
@@ -75,7 +75,7 @@
             // 
             this.InfoText.Location = new System.Drawing.Point(180, 58);
             this.InfoText.Name = "InfoText";
-            this.InfoText.Size = new System.Drawing.Size(931, 20);
+            this.InfoText.Size = new System.Drawing.Size(1252, 20);
             this.InfoText.TabIndex = 2;
             this.InfoText.TextChanged += new System.EventHandler(this.InfoText_TextChanged);
             // 
