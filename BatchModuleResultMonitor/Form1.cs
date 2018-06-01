@@ -20,6 +20,9 @@ namespace BatchModuleResultMonitor
         private void button1_Click(object sender, EventArgs e)
 
         {
+            //********************************************************************************************************
+            // Add data to barchart
+            //********************************************************************************************************
             string SerieName = "Batch Weight";
             int NumberOfBar = 40;
             this.chart1.Series[SerieName].Points.Clear();
@@ -27,7 +30,7 @@ namespace BatchModuleResultMonitor
             {
                 this.chart1.Series[SerieName].Points.AddXY((i+1).ToString() , 200);
             }
-
+            // Add text when file load done
             InfoText.Text = "Data loaded correct";
         }
 
