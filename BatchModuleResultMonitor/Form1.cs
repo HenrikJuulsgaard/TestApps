@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,10 +29,22 @@ namespace BatchModuleResultMonitor
             this.chart1.Series[SerieName].Points.Clear();
             for (int i = 0; i < NumberOfBar; i++)
             {
-                this.chart1.Series[SerieName].Points.AddXY((i+1).ToString() , 200);
+                chart1.Series[SerieName].Points.AddXY((i+1).ToString() , 200);
             }
             // Add text when file load done
             InfoText.Text = "Data loaded correct";
+
+
+
+            //********************************************************************************************************
+            //  Read to string
+            //********************************************************************************************************
+            string[] s3 = File.ReadAllLines(@"C:\Temp\Test.txt");
+
+
+            //********************************************************************************************************
+            // 
+            //********************************************************************************************************
         }
 
         private void chart1_Click(object sender, EventArgs e)
@@ -44,5 +57,6 @@ namespace BatchModuleResultMonitor
         {
           
         }
+        
     }
 }
