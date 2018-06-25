@@ -26,22 +26,42 @@ namespace BatchModuleResultMonitor
             //********************************************************************************************************
             //  Read to string
             //********************************************************************************************************
-            string[] s3 = File.ReadAllLines(@"C:\Temp\Test.txt");
-            double[] iData = new double[s3.Length];
-
-            // convert to int
-            for (int i = 0; i < s3.Length; i++)
+            string sFileName = "";
+            if (sFileName == "")
             {
-                iData[i] = double.Parse(s3[i]);
+                sFileName= PathTextBox.Text;    // @"C:\Temp\AlgoLog_2.txt";
+            }
+
+           
+            string[] sFile = File.ReadAllLines(sFileName);
+            // Get value out from CSV element
+          
+            double[] iData = new double[sFile.Length];
+
+            // convert to double array
+            for (int i = 0; i < sFile.Length; i++)
+            {
+                // Get each element loaded and convert to double, save in data array
+                int PosStart = sFile[i].IndexOf("Closing weight") + 14;
+                string sTemp = sFile[i].Substring(PosStart + 1);
+                int PosStop = sTemp.IndexOf(@"Item") - 1;
+                sTemp = sTemp.Remove(PosStop);
+                iData[i] = double.Parse(sTemp);
                 iData[i] /= 10;
             }
+
+
+
+            //********************************************************************************************************
+            // Work with the data
+            //********************************************************************************************************
 
             // Sort numbers
             Array.Sort(iData);
             d.arrData = iData;
-            int[] arrMax = d.GrafData();
+            int[] arrMax = d.GrafData(30);
 
-
+            // Calculate std dev
             Double StDev = d.StandardDeviation(iData);
 
 
@@ -49,33 +69,23 @@ namespace BatchModuleResultMonitor
             // Add data to barchart
             //********************************************************************************************************
             string SerieName = "Batch Weight";
-            int NumberOfBar = 40;
-            this.chart1.Series[SerieName].Points.Clear();
+            chart1.Series[SerieName].Points.Clear();
             string Temp = "";
 
-            for (int i = 0; i < arrMax.Length; i++)
+             for (int i = 0; i < arrMax.Length; i++)
             {
                 Temp =  arrMax[i].ToString() + (i + 1).ToString();
-                chart1.Series[SerieName].Points.AddXY(Temp, arrMax[i]);
 
+                chart1.Series[SerieName].Points.AddXY(Temp, arrMax[i]);
+               
             }
 
-
-            //for (int i = 0; i < iData.Length; i++)
-            //{
-            //    chart1.Series[SerieName].Points.AddXY( iData[i], (i + 1).ToString());
-
-            //}
-
+           
             // Add text when file load done
             InfoText.Text = "Data loaded correct";
 
-
-
-
-            //********************************************************************************************************
-            // 
-            //********************************************************************************************************
+            // Add text to standard diviation textbox
+            StdDevTxtBox.Text = StDev.ToString();
         }
 
         private void chart1_Click(object sender, EventArgs e)
@@ -84,19 +94,19 @@ namespace BatchModuleResultMonitor
             InfoText.Text = " Series 1 data ";
         }
         
-        private void InfoText_TextChanged(object sender, EventArgs e)
+ 
+
+        private void Form1_Load(object sender, EventArgs e)
         {
-          
+
         }
-   
-      
     }
 
     public class Data
     {
         public double[] arrData { get; set; }
 
-        double _Max;
+     //   double _Max;
 
 
         // Standard diviation
@@ -111,12 +121,13 @@ namespace BatchModuleResultMonitor
             return (int) arrData.Max();
         }
 
-        public int[] GrafData()
+        public int[] GrafData(int ChartLenght)
         {
-            int[] _GrafData = new int[20];
+            // Number of bars in chart
+            int[] _GrafData = new int[ChartLenght];
 
             // tester
-            double span = (arrData[arrData.Length-1] - arrData[0]) / 20;
+            double span = (arrData[arrData.Length-1] - arrData[0]) / _GrafData.Length;
             int GrafPoint = 0;
 
             for (int i = 0; i < (arrData.Length - 1); i++)
