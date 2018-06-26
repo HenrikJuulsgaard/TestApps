@@ -47,22 +47,31 @@ namespace BatchModuleResultMonitor
                 int PosStop = sTemp.IndexOf(@"Item") - 1;
                 sTemp = sTemp.Remove(PosStop);
                 iData[i] = double.Parse(sTemp);
-                iData[i] /= 10;
+               // iData[i] /= 10;
             }
 
-
-
+            
             //********************************************************************************************************
             // Work with the data
             //********************************************************************************************************
 
+            // Variables
+            int BatchMaxWeight;
+            int BatchAvgWeight;
+            int BatchMinWeight;
+
             // Sort numbers
             Array.Sort(iData);
             d.arrData = iData;
-            int[] arrMax = d.GrafData(30);
+            int[] arrMax = d.GrafData(20);
 
             // Calculate std dev
             Double StDev = d.StandardDeviation(iData);
+
+            // Get Array data
+            BatchMaxWeight = d.Max();
+            BatchAvgWeight = d.Avg();
+            BatchMinWeight = d.Min();
 
 
             //********************************************************************************************************
@@ -77,15 +86,22 @@ namespace BatchModuleResultMonitor
                 Temp =  arrMax[i].ToString() + (i + 1).ToString();
 
                 chart1.Series[SerieName].Points.AddXY(Temp, arrMax[i]);
-               
-            }
+                chart1.ChartAreas[0].AxisX.Interval = 2;
 
-           
+                chart1.ChartAreas[0].AxisX.CustomLabels.Add(arrMax.Length, i, (i+1).ToString());
+            }
+            
+
             // Add text when file load done
             InfoText.Text = "Data loaded correct";
 
             // Add text to standard diviation textbox
-            StdDevTxtBox.Text = StDev.ToString();
+            StdDevTxtBox.Text = StDev.ToString("N4");
+
+            // Add data to batch weight info
+            TxtBoxMax.Text = BatchMaxWeight.ToString();
+            TxtBoxAvg.Text = BatchAvgWeight.ToString();
+            TxtBoxMin.Text = BatchMinWeight.ToString();
         }
 
         private void chart1_Click(object sender, EventArgs e)
@@ -106,7 +122,6 @@ namespace BatchModuleResultMonitor
     {
         public double[] arrData { get; set; }
 
-     //   double _Max;
 
 
         // Standard diviation
@@ -116,9 +131,22 @@ namespace BatchModuleResultMonitor
             return Math.Sqrt(values.Average(v => Math.Pow(v - avg, 2)));
         }
 
+        // Get array max
         public int Max()
         {
-            return (int) arrData.Max();
+            return (int)arrData.Max();
+        }
+
+        // Get array average
+        public int Avg()
+        {
+            return (int)arrData.Average();
+        }
+
+        // Get array minimum
+        public int Min()
+        {
+            return (int) arrData.Min();
         }
 
         public int[] GrafData(int ChartLenght)
