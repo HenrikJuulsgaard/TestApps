@@ -88,7 +88,7 @@ namespace BatchModuleResultMonitor
                 chart1.Series[SerieName].Points.AddXY(Temp, arrMax[i]);
                 chart1.ChartAreas[0].AxisX.Interval = 2;
 
-                chart1.ChartAreas[0].AxisX.CustomLabels.Add(arrMax.Length, i, (i+1).ToString());
+              //   chart1.ChartAreas[0].AxisX.CustomLabels.Add(arrMax.Length, i, (i+1).ToString());
             }
             
 
